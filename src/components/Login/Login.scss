@@ -1,0 +1,99 @@
+    $greenColor : #1DB954;
+    $borderRadius : 99px;
+    $fontBold : 'Gotham Black';
+    $fontLight : 'Gotham Light';
+    $XL : 1200px;
+    $MD : 1024px;
+    $SM : 768px;
+    $XS : 480px;
+
+    @mixin gridCenter {
+        display: grid;
+        place-items: center;
+    }
+
+    @mixin Responsive($canvas) {
+        @if $canvas==XS {
+            @media only screen and (max-width: $XS) {
+                @content;
+            }
+        }
+
+        @else if $canvas==SM {
+            @media only screen and (max-width: $SM) {
+                @content;
+            }
+        }
+
+        @else if $canvas==MD {
+            @media only screen and (max-width: $MD) {
+                @content;
+            }
+        }
+
+        @else if $canvas==XL {
+            @media only screen and (max-width: $XL) {
+                @content;
+            }
+        }
+    }
+
+    .login {
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        background-color: black;
+    }
+
+    .login-spotify {
+        @include gridCenter();
+
+        img {
+            width: 20%;
+
+        }
+
+        a {
+            font-size: 13px;
+            padding: 15px 50px;
+            text-transform: uppercase;
+            font-family: $fontBold;
+            text-decoration: none;
+            color: white;
+            border-radius: $borderRadius;
+            background-color: $greenColor;
+        }
+    }
+
+    .login-form {
+        @include gridCenter;
+        margin: auto;
+            width: 400px;
+
+        @include Responsive(SM)
+        {
+            width: 300px;
+        }
+        
+    }
+
+    .or-row {
+        display: flex;
+        width: 400px;
+        margin: auto;
+        justify-content: space-between;
+        align-items: center;
+        @include Responsive(SM)
+        {
+            width: 300px;
+        }
+        p {
+            color: white;
+        }
+
+        .line {
+            height: 1px;
+            background-color: white;
+            width: 40%;
+        }
+    }

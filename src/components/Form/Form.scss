@@ -1,0 +1,53 @@
+$fontLight : 'Gotham Light';
+$greenColor : #1DB954;
+
+.auth-form{
+    width: 100%;
+}
+.input-group{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    .auth-input{
+        padding: 10px 50px  10px 10px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        font-family:$fontLight;
+
+    }
+    label{
+        color: white;
+        font-family:$fontLight;
+
+        padding: 8px 0;
+    }
+}
+.password-reset{
+    color: white;
+    font-family:$fontLight;
+}
+.submit-row{
+    padding: 20px 0;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.remember-me{
+    color: white;
+    input{
+        border: 1px solid $greenColor;
+        outline: none;
+        border-radius: 4px;
+        &:checked{
+            background-color:$greenColor ;
+
+        }
+    }
+    label{
+        margin-left: 10px;
+            font-family: $fontLight;
+
+    }
+}
+

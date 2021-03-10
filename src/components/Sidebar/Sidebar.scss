@@ -1,0 +1,32 @@
+.sidebar{
+    background-color: black;
+    flex: .2;
+    height: 100vh;
+    padding: 0 10px;
+    color: rgb(170, 170, 170);
+    padding:0 20px;
+}
+.sidebar-logo{
+    height: 70px;
+    object-fit: contain;
+    width: 120px;
+}
+.playlist-box{
+    padding: 40px 0 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #282828;
+}
+.playlist-title{
+    padding-bottom: 10px;
+}
+.playlist-wrap{
+    height: 200px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        width: 6px;
+    background-color: black;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #a7a7a7;
+    }
+}

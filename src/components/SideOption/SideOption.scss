@@ -1,0 +1,20 @@
+.side-option{
+    height: 40px;
+    transition : all 200ms ease;
+    display: flex;
+    align-items: center;
+    p{
+        cursor: pointer;
+        font-size: 13px;
+   }
+   .side-option-icon{
+       margin: 0 10px 0 0;
+       &.theme{
+           padding: 4px;
+           color: black;
+       }
+   }
+    &:hover{
+        color: white ;
+    }
+}
