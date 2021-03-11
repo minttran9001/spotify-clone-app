@@ -1,5 +1,75 @@
-.body{
+.body {
     flex: .8;
     height: 100vh;
-    background: linear-gradient(rgb(91,87,115),rgba(0,0,0,1));
+    overflow-y: scroll;
+    background: linear-gradient(rgb(91, 86, 112), rgba(0, 0, 0, 1));
+    padding-bottom: 95px;
+}
+
+.body-info {
+    padding: 30px 40px;
+    display: flex;
+    color: white;
+
+    align-items: flex-end;
+}
+
+.album-info {
+    padding: 0 20px;
+
+}
+
+.album-img {
+    width: 200px;
+    object-fit: cover;
+    height: 200px;
+    -webkit-box-shadow: -3px -2px 12px -2px #000000;
+    box-shadow: -3px -2px 12px -2px #000000;
+
+}
+
+.album-type {
+    font-family: 'Gotham Light';
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.singer-name {
+    font-family: 'Gotham Light';
+
+}
+
+.total-song {
+    font-family: 'Gotham Light';
+
+}
+
+.total-time {
+    font-family: 'Gotham Light';
+
+}
+.album-type{}
+.singer-info {
+    display: flex;
+
+    align-items: center;
+
+    .dot {
+        width: 5px;
+        margin: 0 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: #868686;
+    }
+}
+
+.singer-name {
+    font-family: 'Gotham Black';
+}
+
+.singer-img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
 }

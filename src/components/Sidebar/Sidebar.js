@@ -3,7 +3,14 @@ import "./Sidebar.scss";
 import logo from "../../assets/images/Spotify_Logo_CMYK_White.png";
 import SideOption from "../SideOption/SideOption";
 import { Home, Search, LibraryMusic, Add, Favorite } from "@material-ui/icons";
+import {useDataPlaylist} from '../../context/PlaylistLayer'
+import { getUserPlayLists } from "../../actions";
 export default function Sidebar() {
+  const [{userPlaylists},dispatch] = useDataPlaylist()
+  React.useEffect(() => {
+    getUserPlayLists(dispatch)
+  }, [])
+  console.log(userPlaylists)
   return (
     <div className="sidebar">
       <img src={logo} alt="Spotify Logo" className="sidebar-logo" />
