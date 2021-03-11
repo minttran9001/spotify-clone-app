@@ -1,0 +1,78 @@
+.search-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    padding: 10px 15px;
+    p {
+        cursor: pointer;
+        font-family: 'Gotham Light';
+
+    }
+    &:hover{
+        background-color: #2D2F32;
+
+    }
+}
+
+.search-info {
+    display: flex;
+    flex: .4;
+    align-items: center;
+
+       img{
+        cursor: pointer;
+        margin-right: 20px;
+        width: 50px;
+        object-fit: contain;
+        height: 50px;
+       }
+    
+    .artist-img{
+        border-radius: 50%;
+
+    }
+
+}
+
+.search-detail {
+
+    p {
+        font-family: 'Gotham Light';
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    span {
+        font-family: 'Gotham Light';
+
+        font-size: 12px;
+        color: #949494;
+    }
+}
+
+.search-album {
+    flex: .3;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-widget {
+    flex: .3;
+    display: flex;
+    justify-content: flex-end;
+    button{
+        background-color: transparent;
+        border-radius: 99px;
+        padding: 10px 40px;
+        outline: none;
+        color: #949494;
+        transition: all .5s;
+        cursor: pointer;
+        border: 1px solid #949494;
+        &:hover{
+            background-color: #141516;
+        }
+    }
+}

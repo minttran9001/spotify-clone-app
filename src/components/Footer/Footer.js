@@ -19,6 +19,7 @@ import {
 import { useDataTrack } from "../../context/TrackLayer";
 import { pauseTrack, playTrack, stopTrack } from "../../actions";
 export default function Footer() {
+
   const [
     { playingTrack, trackState, isTrackLoading },
     dispatch,

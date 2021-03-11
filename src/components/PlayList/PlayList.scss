@@ -5,14 +5,19 @@
     font-size: 14px;
 }
 .playlist-head{
-    padding: 0 40px;
+    padding: 0 40px 20px 40px;
     display: flex;
+    border-bottom: 1px solid #696969;
     margin-bottom: 20px;
     align-items: center;
     .icon{
         cursor: pointer;
         margin-right: 20px;
         font-size: 50px;
+        &.white{
+            font-size: 30px;
+            color: white;
+        }
         &.play-icon{
             padding: 0;
             font-size: 70px;

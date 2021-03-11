@@ -4,23 +4,26 @@ import "./Body.scss";
 import singer from "../../assets/images/59f4e1659b12d53ec2ca9c67a73772026b2fe7e3.jpg";
 import PlayList from "../PlayList/PlayList";
 import { useDataPlaylist } from "../../context/PlaylistLayer";
-import { getPlayList } from "../../actions";
+import { getWeeklyPlayList } from "../../actions";
 import Loading from "../Loading/Loading";
+import test from "../../assets/images/Mint.png";
+import SearchBox from "../SearchBox/SearchBox";
 export default function Body() {
   const [{ playlist, isLoading }, dispatch] = useDataPlaylist();
+
   React.useEffect(() => {
-    getPlayList(dispatch);
+    getWeeklyPlayList(dispatch);
   }, []);
   return (
     <div className="body">
       {isLoading ? (
         <Loading />
       ) : (
-        <div>
+        <>
           <Header />
           <div className="body-info">
             <img
-              src={playlist.images[0].url}
+              src={playlist.images.length > 0 ? playlist.images[0].url : test}
               className="album-img"
               alt="album img"
             />
@@ -40,8 +43,12 @@ export default function Body() {
               </div>
             </div>
           </div>
-          <PlayList playlist={playlist.tracks.items} />
-        </div>
+          {playlist.tracks.items.length > 0 ? (
+            <PlayList playlist={playlist.tracks.items} />
+          ) : (
+            <SearchBox />
+          )}
+        </>
       )}
     </div>
   );

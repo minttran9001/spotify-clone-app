@@ -9,34 +9,44 @@ import {
   playlistInitialState,
   playlistReducer,
 } from "./reducers/playlistReducer";
+import {
+  searchListInitialState,
+  searchListReducer,
+} from "./reducers/searchListReducer";
 import { PlaylistLayer } from "./context/PlaylistLayer";
 import { TrackLayer } from "./context/TrackLayer";
+import { SearchListLayer } from "./context/SearchListLayer";
 const initialState = {
   user: userInitialState,
   track: trackInitialState,
   playlist: playlistInitialState,
+  search: searchListInitialState,
 };
 const reducer = {
   userReducer,
   trackReducer,
   playlistReducer,
+  searchListReducer,
 };
 ReactDOM.render(
-  <React.StrictMode>
-    <AuthLayer initialState={initialState.user} reducer={reducer.userReducer}>
-      <PlaylistLayer
-        initialState={initialState.playlist}
-        reducer={reducer.playlistReducer}
+  <AuthLayer initialState={initialState.user} reducer={reducer.userReducer}>
+    <PlaylistLayer
+      initialState={initialState.playlist}
+      reducer={reducer.playlistReducer}
+    >
+      <TrackLayer
+        initialState={initialState.track}
+        reducer={reducer.trackReducer}
       >
-        <TrackLayer
-          initialState={initialState.track}
-          reducer={reducer.trackReducer}
+        <SearchListLayer
+          initialState={initialState.search}
+          reducer={reducer.searchListReducer}
         >
           <App />
-        </TrackLayer>
-      </PlaylistLayer>
-    </AuthLayer>
-  </React.StrictMode>,
+        </SearchListLayer>
+      </TrackLayer>
+    </PlaylistLayer>
+  </AuthLayer>,
   document.getElementById("root")
 );
 

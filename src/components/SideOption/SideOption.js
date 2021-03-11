@@ -1,8 +1,8 @@
 import React from "react";
 import "./SideOption.scss";
-export default function SideOption({ title, Icon, background,font }) {
+export default function SideOption({onClick, title, Icon, background,font }) {
   return (
-    <div className="side-option">
+    <div onClick={onClick} className="side-option">
       {Icon ? (
         <Icon
           style={{ background: background }}

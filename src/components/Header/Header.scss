@@ -2,8 +2,12 @@ $greenColor : #1DB954;
 $greyColor : #282828;
 $greyLight:#181818;
 .header{
+    position: sticky;
+
     display: flex;
     width: 100%;
+    top: 0;
+    left: 0;
     height: 90px;
     align-items: center;
     justify-content: space-between;

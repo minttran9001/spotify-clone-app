@@ -4,13 +4,15 @@ import logo from "../../assets/images/Spotify_Logo_CMYK_White.png";
 import SideOption from "../SideOption/SideOption";
 import { Home, Search, LibraryMusic, Add, Favorite } from "@material-ui/icons";
 import {useDataPlaylist} from '../../context/PlaylistLayer'
-import { getUserPlayLists } from "../../actions";
+import { createUserPlaylist, selectPlaylist } from "../../actions";
 export default function Sidebar() {
-  const [{userPlaylists},dispatch] = useDataPlaylist()
-  React.useEffect(() => {
-    getUserPlayLists(dispatch)
-  }, [])
-  console.log(userPlaylists)
+  const [{userPlayLists},dispatch] = useDataPlaylist()
+  const _createPlayList = ()=>{
+    createUserPlaylist(dispatch)
+  }
+  const _selectPlaylist = (id)=>{
+    selectPlaylist(dispatch,id)
+  }
   return (
     <div className="sidebar">
       <img src={logo} alt="Spotify Logo" className="sidebar-logo" />
@@ -19,7 +21,7 @@ export default function Sidebar() {
       <SideOption Icon={LibraryMusic} title="Your Library" />
       <div className="playlist-box">
         <p className="playlist-title">Playlists</p>
-        <SideOption background={"#B2B2B2"} Icon={Add} title="Create Playlist" />
+        <SideOption onClick={_createPlayList} background={"#B2B2B2"} Icon={Add} title="Create Playlist" />
         <SideOption
           background={"#6566A0"}
           Icon={Favorite}
@@ -27,17 +29,12 @@ export default function Sidebar() {
         />
       </div>
       <div className="playlist-wrap">
-          <SideOption font="light" title="My Playlist 1#" />
-          <SideOption font="light" title="My Playlist 2#" />
-          <SideOption font="light" title="My Playlist 3#" />
-          <SideOption font="light" title="My Playlist 4#" />
-          <SideOption font="light" title="My Playlist 5#" />
-          <SideOption font="light" title="My Playlist 6#" />
-          <SideOption font="light" title="My Playlist 7#" />
-          <SideOption font="light" title="My Playlist 7#" />
-          <SideOption font="light" title="My Playlist 7#" />
-          <SideOption font="light" title="My Playlist 7#" />
-
+          {
+            userPlayLists.length > 0 ?  userPlayLists.map((item,index)=>(
+              <SideOption onClick={()=>_selectPlaylist(item.id)} key={index} font="light" title={item.name} />
+            )) :
+            <SideOption font="light" title="Create your first playlist" />
+          }
           </div>
     </div>
   );
