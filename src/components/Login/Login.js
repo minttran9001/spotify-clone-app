@@ -9,14 +9,6 @@ export default function Login({ loginUrl }) {
         <img src={logo} alt="Logo" />
         <a href={loginUrl}>Continue with spotify</a>
       </div>
-      <div className="or-row">
-          <div className="line"></div>
-          <p>OR</p>
-          <div className="line"></div>
-      </div>
-        <div className="login-form">
-        <Form/>
-        </div>
     </div>
   );
 }

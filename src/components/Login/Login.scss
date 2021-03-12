@@ -49,13 +49,13 @@
         @include gridCenter();
 
         img {
-            width: 20%;
+            width: 50%;
 
         }
 
         a {
             font-size: 13px;
-            padding: 15px 50px;
+            padding: 20px 50px;
             text-transform: uppercase;
             font-family: $fontBold;
             text-decoration: none;
