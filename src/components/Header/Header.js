@@ -9,20 +9,18 @@ import {
   Launch,
 } from "@material-ui/icons";
 import { useDataTrack } from "../../context/TrackLayer";
-import { useDataAuth } from "../../context/AuthLayer";
 import { logOut } from "../../actions";
 
-export default function Header() {
+export default function Header({user,userDispatch}) {
   const [dropdown, setDropdown] = React.useState(false);
   const [{ playingTrack, isTrackLoading }] = useDataTrack();
-  const [{}, dispatch] = useDataAuth();
-
   const toggleDropDown = () => {
     setDropdown(!dropdown);
   };
   const _logOut = ()=>{
-    logOut(dispatch)
+    logOut(userDispatch)
   }
+
   return (
     <div className="header">
       <div className="header-left">
@@ -42,8 +40,8 @@ export default function Header() {
         <button className="upgrade-button">UPGRADE</button>
         <div className="user-widget">
           <div onClick={() => toggleDropDown()} className="user-info">
-            <img src={Mint} alt="user avatar" />
-            <span>Mint</span>
+            <img src={user.images[0].url} alt="user avatar" />
+            <span>{user.display_name}</span>
             <KeyboardArrowDown className="user-arrow" />
           </div>
           <div

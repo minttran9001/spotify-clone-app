@@ -9,7 +9,7 @@ import Loading from "../Loading/Loading";
 import test from "../../assets/images/node.png";
 import SearchBox from "../SearchBox/SearchBox";
 import { MoreHoriz } from "@material-ui/icons";
-export default function Body() {
+export default function Body(props) {
   const [{ playlist, isLoading }, dispatch] = useDataPlaylist();
 
   React.useEffect(() => {
@@ -18,10 +18,10 @@ export default function Body() {
   return (
     <div className="body">
       {isLoading ? (
-        <Loading />
+        <Loading  />
       ) : (
         <>
-          <Header />
+          <Header user={props.user} userDispatch={props.userDispatch}  />
           <div className="body-info">
             <img
               src={playlist.images.length > 0 ? playlist.images[0].url : test}

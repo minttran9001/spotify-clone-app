@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.scss";
 import {  loginUrl } from "./api/spotify";
 import Login from "./components/Login/Login";
@@ -7,13 +7,13 @@ import { useDataAuth } from "./context/AuthLayer";
 import { getUserFromUrl } from "./actions";
 
 function App() {
-  const [{ isLogged }, dispatch] = useDataAuth();
+  const [{user, isLogged }, dispatch] = useDataAuth();
   useEffect(() => {
     getUserFromUrl(dispatch);
   }, []);
   return (
     <div className="App">
-      {isLogged ? <Player /> : <Login loginUrl={loginUrl} />}
+      {isLogged ? <Player user={user} userDispatch={dispatch} /> : <Login loginUrl={loginUrl} />}
     </div>
   );
 }
