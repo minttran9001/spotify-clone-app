@@ -40,7 +40,7 @@ export default function Header({user,userDispatch}) {
         <button className="upgrade-button">UPGRADE</button>
         <div className="user-widget">
           <div onClick={() => toggleDropDown()} className="user-info">
-            <img src={user.images[0].url} alt="user avatar" />
+            <img src={user.images.length > 0 ? user.images[0].url : Mint} alt="user avatar" />
             <span>{user.display_name}</span>
             <KeyboardArrowDown className="user-arrow" />
           </div>
