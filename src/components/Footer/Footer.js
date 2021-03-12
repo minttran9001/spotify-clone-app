@@ -1,6 +1,5 @@
 import React from "react";
 import "./Footer.scss";
-import tempImg from "../../assets/images/59f4e1659b12d53ec2ca9c67a73772026b2fe7e3.jpg";
 import {
   FavoriteBorderOutlined,
   Shuffle,
@@ -17,13 +16,21 @@ import {
   Pause,
 } from "@material-ui/icons";
 import { useDataTrack } from "../../context/TrackLayer";
-import { pauseTrack, playTrack, stopTrack } from "../../actions";
-export default function Footer() {
+import { useDataPlaylist } from "../../context/PlaylistLayer";
 
+import {
+  getTrackById,
+  pauseTrack,
+  playListMusic,
+  playTrack,
+  stopTrack,
+} from "../../actions";
+export default function Footer() {
   const [
-    { playingTrack, trackState, isTrackLoading },
+    { playingTrack, index, trackState, isTrackLoading },
     dispatch,
   ] = useDataTrack();
+  const [{ playlist }] = useDataPlaylist();
   const [time, setTime] = React.useState({
     duration: 0,
     current: 0,
@@ -32,24 +39,45 @@ export default function Footer() {
   const audio = document.getElementById("audio");
   React.useEffect(() => {
     if (audio != null) {
-      audio.addEventListener("timeupdate", () => {
-        if (audio.readyState > 0) {
-          setTime({
-            current: Math.round(audio.currentTime),
-            duration: Math.round(audio.duration),
-          });
-        }
-        if (Math.round(audio.currentTime) === Math.round(audio.duration)) {
+      audio.addEventListener("timeupdate", onTimeUpdate);
+      return () => {
+        audio.removeEventListener("timeupdate", onTimeUpdate);
+      };
+    }
+  }, [audio, index]);
+  const onTimeUpdate = () => {
+    if (audio.readyState > 0) {
+      setTime({
+        current: Math.round(audio.currentTime),
+        duration: Math.round(audio.duration),
+      });
+      if (Math.round(audio.currentTime) === Math.round(audio.duration)) {
+        if (playlist.tracks.items[index + 1]) {
+          if (index !== -1) {
+            playListMusic(dispatch, index + 1);
+            getTrackById(dispatch, playlist.tracks.items[index + 1].track.id);
+          } else {
+            stopTrack(dispatch);
+          }
+        } else {
+          playListMusic(dispatch, -1);
           stopTrack(dispatch);
         }
-      });
+      }
     }
-  }, [audio]);
+  };
   React.useEffect(() => {
     setTime({
       duration: 0,
       current: 0,
     });
+    if (audio != null) {
+      let i = setInterval(() => {
+        playTrack(dispatch);
+        audio.play();
+        clearInterval(i);
+      }, 3000);
+    }
   }, [playingTrack]);
 
   const handlePlayTrack = () => {
@@ -121,7 +149,9 @@ export default function Footer() {
           ) : (
             <PlayCircleOutline
               onClick={() => {
-                !isTrackLoading ? handlePlayTrack() : console.log("Select a song");
+                !isTrackLoading
+                  ? handlePlayTrack()
+                  : console.log("Select a song");
               }}
               className="control-icon play"
             />

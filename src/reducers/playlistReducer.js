@@ -1,10 +1,20 @@
 export const playlistInitialState = {
-  userPlayLists: [],
+  userPlaylists: [],
   isLoading: true,
   playlist: {},
   isSelected: false,
 };
-
+const isExist = (arr, trackId) => {
+  if (arr.length > 0) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].track.id === trackId) {
+        return true;
+      }
+    }
+    return false;
+  }
+  return false;
+};
 export const playlistReducer = (state, action) => {
   switch (action.type) {
     case "GET_USER_PLAYLISTS":
@@ -23,9 +33,7 @@ export const playlistReducer = (state, action) => {
       };
       return state;
     case "CREATE_USER_PLAYLIST":
-      console.log("prevState: ", state);
-      console.log("action: ", action);
-      const newArr = playlistInitialState.userPlayLists;
+      const newArr = playlistInitialState.userPlaylists;
       let maxId;
       if (newArr.length > 0) {
         maxId = newArr.reduce((p, v) => {
@@ -52,19 +60,33 @@ export const playlistReducer = (state, action) => {
       newArr.push(newPlaylist);
       state = {
         ...state,
-        userPlayLists: newArr,
+        userPlaylists: newArr,
       };
       return state;
     case "GET_PLAYLIST_BY_ID_REQUEST":
       return state;
     case "GET_PLAYLIST_BY_ID":
-      const pl = playlistInitialState.userPlayLists.find(
+      const pl = playlistInitialState.userPlaylists.find(
         (item) => item.id === action.id
       );
       state = {
         ...state,
         playlist: pl,
         isSelected: true,
+      };
+      return state;
+    case "ADD_TRACK_TO_PLAYLIST":
+      const plArr = [...playlistInitialState.userPlaylists];
+      plArr.map((item, index) => {
+        if (item.id === action.playlistId) {
+          if (!isExist(plArr[index].tracks.items, action.newTrack.track.id)) {
+            plArr[index].tracks.items.push(action.newTrack);
+          }
+        }
+      });
+      state = {
+        ...state,
+        userPlaylists: [...plArr],
       };
       return state;
     default:

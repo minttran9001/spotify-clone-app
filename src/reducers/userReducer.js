@@ -12,6 +12,11 @@ export const userReducer = (state, action) => {
           token: action.token,
           isLogged: action.token ? true : false,
         };
+      case  "LOG_OUT":
+        return {
+          ...state,
+          isLogged : false
+        }
       default:
         return state;
     }

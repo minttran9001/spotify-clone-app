@@ -2,6 +2,7 @@ export const trackInitialState = {
     trackState: 'stop',
     playingTrack : null,
     isTrackLoading : true,
+    index : -1,
 }
 export const trackReducer = (state, action) => {
     switch (action.type) {
@@ -26,6 +27,11 @@ export const trackReducer = (state, action) => {
         return{
           ...state,
           trackState : 'stop'
+        }
+      case "PLAY_LIST_MUSIC":
+        return {
+          ...state,
+          index : action.index,
         }
       default:
         return state;

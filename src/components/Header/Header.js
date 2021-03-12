@@ -9,12 +9,20 @@ import {
   Launch,
 } from "@material-ui/icons";
 import { useDataTrack } from "../../context/TrackLayer";
+import { useDataAuth } from "../../context/AuthLayer";
+import { logOut } from "../../actions";
+
 export default function Header() {
   const [dropdown, setDropdown] = React.useState(false);
   const [{ playingTrack, isTrackLoading }] = useDataTrack();
+  const [{}, dispatch] = useDataAuth();
+
   const toggleDropDown = () => {
     setDropdown(!dropdown);
   };
+  const _logOut = ()=>{
+    logOut(dispatch)
+  }
   return (
     <div className="header">
       <div className="header-left">
@@ -46,7 +54,7 @@ export default function Header() {
               <Launch className="user-link" />
             </a>
             <a href="/account">Profile</a>
-            <button>Log out</button>
+            <button onClick={_logOut}>Log out</button>
           </div>
         </div>
       </div>

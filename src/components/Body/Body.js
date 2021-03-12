@@ -6,8 +6,9 @@ import PlayList from "../PlayList/PlayList";
 import { useDataPlaylist } from "../../context/PlaylistLayer";
 import { getWeeklyPlayList } from "../../actions";
 import Loading from "../Loading/Loading";
-import test from "../../assets/images/Mint.png";
+import test from "../../assets/images/node.png";
 import SearchBox from "../SearchBox/SearchBox";
+import { MoreHoriz } from "@material-ui/icons";
 export default function Body() {
   const [{ playlist, isLoading }, dispatch] = useDataPlaylist();
 
@@ -43,11 +44,18 @@ export default function Body() {
               </div>
             </div>
           </div>
+          {playlist.tracks.items.length <= 0 ? 
+            <div className="playlist-head">
+              <MoreHoriz className="icon white" />
+            </div>
+           : 
+            <></>
+          }
           {playlist.tracks.items.length > 0 ? (
             <PlayList playlist={playlist.tracks.items} />
-          ) : (
-            <SearchBox />
-          )}
+          ) : <></>}
+            <SearchBox playlistId={playlist.id} />
+      
         </>
       )}
     </div>

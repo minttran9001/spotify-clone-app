@@ -1,12 +1,15 @@
 import React from "react";
 import "./PlayList.scss";
-import { Alarm, PlayCircleFilled, FavoriteBorderOutlined } from "@material-ui/icons";
+import {
+  Alarm,
+  PlayCircleFilled,
+  FavoriteBorderOutlined,
+} from "@material-ui/icons";
 import moment from "moment";
-import { getTrackById } from "../../actions";
+import { getTrackById, playListMusic } from "../../actions";
 import { useDataTrack } from "../../context/TrackLayer";
 export default function PlayList({ playlist }) {
   const [{}, dispatch] = useDataTrack();
-
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60000);
     const seconds = ((time % 60000) / 1000).toFixed(0);
@@ -19,10 +22,18 @@ export default function PlayList({ playlist }) {
   const playATrack = (trackId) => {
     getTrackById(dispatch, trackId);
   };
+  const _handlePlaylist = () => {
+    getTrackById(dispatch, playlist[0].track.id);
+    playListMusic(dispatch)
+  };
+
   return (
     <div className="playlist-box">
       <div className="playlist-head">
-        <PlayCircleFilled className="icon play-icon" />
+        <PlayCircleFilled
+          onClick={_handlePlaylist}
+          className="icon play-icon"
+        />
         <FavoriteBorderOutlined className="icon" />
       </div>
       <table className="playlist-table">

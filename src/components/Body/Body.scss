@@ -17,12 +17,17 @@
 
 .album-info {
     padding: 0 20px;
-
+    h1{
+        font-size: 70px;
+    }
+    
 }
 
 .album-img {
     width: 200px;
-    object-fit: cover;
+    object-fit: contain;
+    cursor: pointer;
+    background-color: #282828;
     height: 200px;
     -webkit-box-shadow: -3px -2px 12px -2px #000000;
     box-shadow: -3px -2px 12px -2px #000000;
@@ -49,7 +54,7 @@
     font-family: 'Gotham Light';
 
 }
-.album-type{}
+
 .singer-info {
     display: flex;
 
